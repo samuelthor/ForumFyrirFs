@@ -1,5 +1,5 @@
 # ForumFyrirFs
-System must display a topic with a subject name and a text.
+System must display a topic with a subject name and a text and people should be able to comment.
 
 It should also have like button to like the topics and so people will be able to gain ranks.
 
