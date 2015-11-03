@@ -1,0 +1,7 @@
+Sem User þarf ég að geta séð Posta og comments svo að síða gerir eh gagn
+
+Sem Admin þarf ég að geta Breytt og eitt postum og comments svo að fólk er ekki að setja eh dónalegt/óviðeigandi inn
+
+Sem enginn þarf ég að geta sign'að mig inn eða signað up svo að þú getur Postað inná forum'ið
+
+Sem User þarf ég að geta eytt mínum eigin póstum og commentum svo að ef þú gerir mistök þá getur þú breytt.
