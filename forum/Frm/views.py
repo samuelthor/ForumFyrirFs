@@ -4,11 +4,12 @@ from django.core.urlresolvers import reverse
 from django.views import generic
 from .models import Comment, Post
 from django.utils import timezone
+from .tests import TestCase
 
 
 
 class IndexView(generic.ListView):
-    template_name = 'polls/index.html'
+    template_name = 'Frm/index.html'
     context_object_name = 'latest_post_list'
 
     def get_queryset(self):
@@ -24,7 +25,11 @@ class IndexView(generic.ListView):
 class DetailView(generic.DetailView):
     model = Post
     template_name = 'Frm/detail.html'
-
+    def get_queryset(self):
+        """
+        Excludes any posts that aren't published yet.
+        """
+        return Post.objects.filter(pub_date__lte=timezone.now())
 
 class ResultsView(generic.DetailView):
     model = Post
@@ -61,3 +66,27 @@ def vote(request, post_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('Frm:results', args=(p.id,)))
+
+class PostIndexDetailTests(TestCase):
+    def test_detail_view_with_a_future_post(self):
+        """
+        The detail view of a post with a pub_date in the future should
+        return a 404 not found.
+        """
+        future_post = create_post(post_text='Future post.',
+                                          days=5)
+        response = self.client.get(reverse('Frm:detail',
+                                   args=(future_post.id,)))
+        self.assertEqual(response.status_code, 404)
+
+    def test_detail_view_with_a_past_post(self):
+        """
+        The detail view of a post with a pub_date in the past should
+        display the post's text.
+        """
+        past_post = create_post(post_text='Past Post.',
+                                        days=-5)
+        response = self.client.get(reverse('Frm:detail',
+                                   args=(past_post.id,)))
+        self.assertContains(response, past_post.post_text,
+                            status_code=200)
