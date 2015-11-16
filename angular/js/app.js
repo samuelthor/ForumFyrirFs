@@ -2,13 +2,17 @@ var app = angular.module('HomeApp', ['ngRoute']);
 
 app.config(['$routeProvider', function($routeProvider) {
  $routeProvider
- .when('/Register', {
-   controller: 'RegisterController',
-   templateUrl: 'views/register.html'
+ .when('/Login', {
+   controller: 'LoginController',
+   templateUrl: 'views/Login.html'
  })
  .when('/outbox/:id', {
    controller: 'EmailController',
    templateUrl: 'views/email.html'
+ })
+ .when('/register', {
+   controller: 'EmailController',
+   templateUrl: 'views/register.html'
  })
  .otherwise({
    redirectTo: '/Home'
