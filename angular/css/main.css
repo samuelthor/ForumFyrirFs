@@ -41,7 +41,9 @@ body {
 .Login-form {
 	margin-top: 60px;
 }
-
+.registeresetpassw{
+  text-align: center;
+}
 form[role=Login] {
 	color: #5d5d5d;
 	background: #f2f2f2;
@@ -65,9 +67,6 @@ form[role=Login] {
 	}
 .Loginlogo{
   text-align: center;
-}
-.register-form {
-	margin-top: 60px;
 }
 
 form[role=register] {
