@@ -5,7 +5,7 @@ from django.views import generic
 from .models import Comment, Post
 from django.utils import timezone
 from .tests import TestCase
-
+from django.contrib.auth.models import User
 
 
 class IndexView(generic.ListView):
@@ -39,6 +39,14 @@ def index(request):
     latest_post_list = Post.objects.order_by('-pub_date')[:5]
     context = {'latest_post_list': latest_post_list}
     return render(request, 'frm/index.html', context)
+
+def register(request):
+    user_name = request.GET['username']
+    emailReg = request.GET['email']
+    password = request.GET['password']
+    u = User(username = user_name,email = emailReg)
+    u.save()
+    return HttpResponse("successfull")
 
 
 def detail(request, post_id):
