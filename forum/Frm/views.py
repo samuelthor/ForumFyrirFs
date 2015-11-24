@@ -44,10 +44,23 @@ def register(request):
     user_name = request.GET['username']
     emailReg = request.GET['email']
     password = request.GET['password']
-    u = User(username = user_name,email = emailReg)
+    u = User.objects.create_user(user_name, emailReg, password)
     u.save()
-    return HttpResponse("successfull")
+    return HttpResponseRedirect("http://localhost/angular/#/Login")
 
+def login(request):
+    user_name = request.GET['username']
+    password = request.GET['password']
+    user = authenticate(username=user_name, password=password)
+    if user is not None:
+        # the password verified for the user
+        if user.is_active:
+            print("User is valid, active and authenticated")
+        else:
+            print("The password is valid, but the account has been disabled!")
+    else:
+        # the authentication system was unable to verify the username and password
+        print("The username and password were incorrect.")
 
 def detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
