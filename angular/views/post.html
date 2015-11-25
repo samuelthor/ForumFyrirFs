@@ -1,0 +1,27 @@
+<div class="container">
+
+  <div class="row" id="pwd-container">
+    <div class="col-md-4"></div>
+
+    <div class="col-md-4">
+      <section class="Post-form">
+        <form method="get" action="localhost:8000/Frm/register" role="Login">
+          <div class="post-view">
+            <h2 class="subject">{{ post.subject }}</h2>
+            <span class="from">{{ post.from }}</span><span class="date">{{ post.datetime | date}}</span>
+            <p class="message">{{ post.message }}</p>
+          </div>
+          <div class="post-comment">
+            <h2>Leave a comment.</h2>
+            <span class="from">{{ post.from }}</span><span class="date">{{ post.datetime | date}}</span>
+            <p class="message">{{ post.message }}</p>
+          </div>
+        </form>
+
+
+  </div>
+
+</div>
+
+
+<a class="back" href="#/Home">Back</a>
