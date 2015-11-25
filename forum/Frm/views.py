@@ -6,6 +6,7 @@ from .models import Comment, Post
 from django.utils import timezone
 from .tests import TestCase
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
 
 
 class IndexView(generic.ListView):
@@ -55,12 +56,12 @@ def login(request):
     if user is not None:
         # the password verified for the user
         if user.is_active:
-            print("User is valid, active and authenticated")
+            return HttpResponseRedirect("http://localhost/angular/#/UCP")
         else:
-            print("The password is valid, but the account has been disabled!")
+            return HttpResponse("The password is valid, but the account has been disabled!")
     else:
         # the authentication system was unable to verify the username and password
-        print("The username and password were incorrect.")
+        return HttpResponse("The username and password were incorrect.")
 
 def detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
